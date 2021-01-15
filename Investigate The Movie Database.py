@@ -22,6 +22,14 @@
 # 1. what are the factors related to the top 50 highest revenue movies ?
 # 2. how did the movie industry evolve through years ? 
 
+# ## Limitations 
+# 
+# 1. A lot of movies in these data set have No budget or revenue which will negatively influence any financial analysis.
+# 2. There was no mention of awards for each movie to see the greatest movies in the critics' point of view.
+# 3. There was no mention of language or country of each movie that will help in the analysis.
+# 4. There was no mention of Writers or screenplay writers of each movie.
+# 5. The data set has NaN Values in a lot of columns Like Cast, director and genres which will decrease our data set
+
 # In[1]:
 
 
@@ -257,6 +265,7 @@ top_100_df.head()
 
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 plt.scatter(top_100_df.popularity,top_100_df.revenue_adj)
+plt.title("Popularity Vs Revenue of the top 100 movies")
 plt.xlabel("Popularity")
 plt.ylabel("Revenue (2010) $");
 
@@ -270,7 +279,9 @@ plt.figure(num=None, figsize=(8, 6), dpi=80)
 plt.hist(top_100_df.budget_adj, alpha=0.5, label='budget_adj')
 plt.hist(top_100_df.revenue_adj, alpha=0.5, label='revenue_adj');
 plt.legend(loc='upper right')
+plt.title("Distribution of Budget and Revenue of the top 100 movies")
 plt.xlabel("Revenue (2010) $") ;
+plt.ylabel("Movies") ;
 
 
 # >As shown in the figure above, All of the top 100 highest revenue movies have made high profit as the highest budget movie have a budget lower than the lowest revenue movie in these movies.
@@ -280,7 +291,9 @@ plt.xlabel("Revenue (2010) $") ;
 
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 plt.hist(top_100_df.runtime,alpha=0.5);
+plt.title("Distribution of Run Time of the top 100 movies")
 plt.xlabel("Run Time (Minutes)");
+plt.ylabel("Movies") ;
 
 
 # >As shown in the figure above, Most of the top 100 movies have a run time from 120 minutes and 150 minutes.
@@ -290,6 +303,8 @@ plt.xlabel("Run Time (Minutes)");
 
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 plt.plot((top_100_df.groupby(['decade'])['original_title'].count()),'-o');
+plt.title("Number of movies through decades in the top 100 movies")
+plt.xlabel("Decade");
 plt.ylabel("Movies");
 
 
@@ -308,6 +323,9 @@ top_100_genres = genres_df [genres_df['revenue_adj'].isin(top_100_df)]
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 genre_count = top_100_genres.groupby(["genres"])["original_title"].count().sort_values(ascending = False)
 plt.bar(genre_count.index,genre_count.values)
+plt.title("Genres in the top 100 movies")
+plt.xlabel("Genres")
+plt.ylabel("Movies")
 plt.xticks(rotation = 90);
 
 
@@ -323,6 +341,9 @@ top_100_rev = pd.Series(cast_df['revenue_adj'].unique()).sort_values(ascending =
 top_100_cast = cast_df [cast_df['revenue_adj'].isin(top_100_rev)] 
 cast_count = top_100_cast.groupby(["cast"])["original_title"].count().sort_values(ascending = False)[0:15]
 plt.bar(cast_count.index,cast_count.values)
+plt.title("Movies for each Actor in the top 100 movies")
+plt.xlabel("Actor");
+plt.ylabel("Movies");
 plt.xticks(rotation = 90);
 
 
@@ -355,6 +376,8 @@ top_100_cast[(top_100_cast["cast"] == "Ian McKellen")]
 
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 plt.plot(movies_df.groupby(['decade' ])["original_title"].count(),'-o')
+plt.title("Number of movies through decades")
+plt.xlabel("Decade");
 plt.ylabel("Movies");
 
 
@@ -368,6 +391,9 @@ genres_df['decade']= np.floor(genres_df.release_year / 10) * 10 #making the deca
 genres_df['decade'] = genres_df['decade'].astype('int64') ;
 x = genres_df.groupby(['genres' ])["original_title"].count().sort_values(ascending = False)
 plt.bar(x.index,x.values)
+plt.title("Genres in all movies")
+plt.xlabel("Genres")
+plt.ylabel("Movies")
 plt.xticks(rotation = 90);
 
 
@@ -382,6 +408,9 @@ for item in x.index[0:5] :
     item_df = genres_df[genres_df["genres"] == item]
     plt.plot(item_df.groupby(['decade' ])["original_title"].count(),label = item)
     plt.legend()
+plt.title("Number Of Movies For Top 5 Genres Through Decades")
+plt.xlabel("Decade")
+plt.ylabel("Movies");
 
 
 # >As shown in the figure above, 
@@ -394,6 +423,8 @@ for item in x.index[0:5] :
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 pop_year= movies_df.groupby(['release_year'])["popularity"].mean()
 plt.plot(pop_year);
+plt.title("Average Popularity Through Years")
+plt.xlabel("Year")
 plt.ylabel("Popularity");
 
 
@@ -405,6 +436,8 @@ plt.ylabel("Popularity");
 plt.figure(num=None, figsize=(8, 6), dpi=80)
 runtime_year= movies_df.groupby(['release_year'])["runtime"].mean()
 plt.plot(runtime_year);
+plt.title("Average Run Time Through Years")
+plt.xlabel("Year")
 plt.ylabel("Run Time (Minutes)");
 
 
