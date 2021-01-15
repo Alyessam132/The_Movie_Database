@@ -13123,6 +13123,20 @@ $( document ).ready(function(){
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Limitations">Limitations<a class="anchor-link" href="#Limitations">&#182;</a></h2><ol>
+<li>A lot of movies in these data set have No budget or revenue which will negatively influence any financial analysis.</li>
+<li>There was no mention of awards for each movie to see the greatest movies in the critics' point of view.</li>
+<li>There was no mention of language or country of each movie that will help in the analysis.</li>
+<li>There was no mention of Writers or screenplay writers of each movie.</li>
+<li>The data set has NaN Values in a lot of columns Like Cast, director and genres which will decrease our data set</li>
+</ol>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -14820,17 +14834,17 @@ dtype: int64</pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Comedy                                        712
-Drama                                         712
-Documentary                                   312
-Drama|Romance                                 289
-Comedy|Drama                                  280
-                                             ... 
-Action|War|Drama                                1
-Animation|Drama|Music|Romance                   1
-Drama|Thriller|Crime|Mystery|Romance            1
-Action|Fantasy|Comedy|Science Fiction           1
-Science Fiction|Action|Adventure|Animation      1
+<pre>Comedy                                       712
+Drama                                        712
+Documentary                                  312
+Drama|Romance                                289
+Comedy|Drama                                 280
+                                            ... 
+Drama|Horror|Comedy                            1
+Drama|Comedy|War|Crime|Thriller                1
+Adventure|Fantasy|Romance|Science Fiction      1
+Thriller|Crime|Drama|Horror                    1
+Action|Comedy|Animation                        1
 Name: genres, Length: 2039, dtype: int64</pre>
 </div>
 
@@ -14864,17 +14878,17 @@ Name: genres, Length: 2039, dtype: int64</pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Louis C.K.                                                                       6
-William Shatner|Leonard Nimoy|DeForest Kelley|James Doohan|George Takei          5
-Bill Burr                                                                        4
-Elijah Wood|Ian McKellen|Viggo Mortensen|Liv Tyler|Orlando Bloom                 3
-Jim Jefferies                                                                    3
-                                                                                ..
-Angelina Jolie|Ethan Hawke|Kiefer Sutherland|Gena Rowlands|Olivier Martinez      1
-Toni Collette|Rhys Wakefield|Luke Ford|Gemma Ward|Lisa Kowalski                  1
-Rene Russo|Jason Alexander|Piper Perabo|Randy Quaid|Robert De Niro               1
-Vincent Cassel|Juliette Lewis|Temuera Morrison|Ernest Borgnine|Djimon Hounsou    1
-Karen Gillan|Stanley Weber|Iain De Caestecker|Henry Ian Cusick|Kate Dickie       1
+<pre>Louis C.K.                                                                    6
+William Shatner|Leonard Nimoy|DeForest Kelley|James Doohan|George Takei       5
+Bill Burr                                                                     4
+George Carlin                                                                 3
+Aziz Ansari                                                                   3
+                                                                             ..
+Clint Eastwood|Jeff Fahey|Charlotte Cornwell|George Dzundza|Alun Armstrong    1
+Huang Bo|Xu Zheng|Zhou Dong-Yu|Yuan Quan                                      1
+John Lurie|Eszter Balint|Richard Edson|Cecillia Stark|Danny Rosen             1
+Mia Farrow|Dianne Wiest|Sam Waterston|Elaine Stritch|Jack Warden              1
+Harrison Ford|Cate Blanchett|Shia LaBeouf|Ray Winstone|Karen Allen            1
 Name: cast, Length: 10719, dtype: int64</pre>
 </div>
 
@@ -15706,6 +15720,7 @@ we will create the visualization to find insights about the factors relared to t
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">top_100_df</span><span class="o">.</span><span class="n">popularity</span><span class="p">,</span><span class="n">top_100_df</span><span class="o">.</span><span class="n">revenue_adj</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Popularity Vs Revenue of the top 100 movies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Popularity&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Revenue (2010) $&quot;</span><span class="p">);</span>
 </pre></div>
@@ -15726,7 +15741,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_47_0.png"
+<img src="output_48_0.png"
 >
 </div>
 
@@ -15754,7 +15769,9 @@ we will create the visualization to find insights about the factors relared to t
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">top_100_df</span><span class="o">.</span><span class="n">budget_adj</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;budget_adj&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">top_100_df</span><span class="o">.</span><span class="n">revenue_adj</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;revenue_adj&#39;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Budget and Revenue of the top 100 movies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Revenue (2010) $&quot;</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">)</span> <span class="p">;</span>
 </pre></div>
 
     </div>
@@ -15773,7 +15790,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_49_0.png"
+<img src="output_50_0.png"
 >
 </div>
 
@@ -15799,7 +15816,9 @@ we will create the visualization to find insights about the factors relared to t
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">top_100_df</span><span class="o">.</span><span class="n">runtime</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Run Time of the top 100 movies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Run Time (Minutes)&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">)</span> <span class="p">;</span>
 </pre></div>
 
     </div>
@@ -15818,7 +15837,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_51_0.png"
+<img src="output_52_0.png"
 >
 </div>
 
@@ -15844,6 +15863,8 @@ we will create the visualization to find insights about the factors relared to t
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">top_100_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;decade&#39;</span><span class="p">])[</span><span class="s1">&#39;original_title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()),</span><span class="s1">&#39;-o&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Number of movies through decades in the top 100 movies&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Decade&quot;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">);</span>
 </pre></div>
 
@@ -15863,7 +15884,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_53_0.png"
+<img src="output_54_0.png"
 >
 </div>
 
@@ -15904,6 +15925,9 @@ we will create the visualization to find insights about the factors relared to t
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">genre_count</span> <span class="o">=</span> <span class="n">top_100_genres</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;genres&quot;</span><span class="p">])[</span><span class="s2">&quot;original_title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">genre_count</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">genre_count</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Genres in the top 100 movies&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Genres&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">);</span>
 </pre></div>
 
@@ -15923,7 +15947,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_56_0.png"
+<img src="output_57_0.png"
 >
 </div>
 
@@ -15956,6 +15980,9 @@ we will create the visualization to find insights about the factors relared to t
 <span class="n">top_100_cast</span> <span class="o">=</span> <span class="n">cast_df</span> <span class="p">[</span><span class="n">cast_df</span><span class="p">[</span><span class="s1">&#39;revenue_adj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">top_100_rev</span><span class="p">)]</span> 
 <span class="n">cast_count</span> <span class="o">=</span> <span class="n">top_100_cast</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;cast&quot;</span><span class="p">])[</span><span class="s2">&quot;original_title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">cast_count</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">cast_count</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Movies for each Actor in the top 100 movies&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Actor&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">);</span>
 </pre></div>
 
@@ -15975,7 +16002,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_58_0.png"
+<img src="output_59_0.png"
 >
 </div>
 
@@ -16347,6 +16374,8 @@ we will create the visualization to find insights about the factors relared to t
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">movies_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;decade&#39;</span> <span class="p">])[</span><span class="s2">&quot;original_title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span><span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Number of movies through decades&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Decade&quot;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">);</span>
 </pre></div>
 
@@ -16366,7 +16395,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_65_0.png"
+<img src="output_66_0.png"
 >
 </div>
 
@@ -16395,6 +16424,9 @@ we will create the visualization to find insights about the factors relared to t
 <span class="n">genres_df</span><span class="p">[</span><span class="s1">&#39;decade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">genres_df</span><span class="p">[</span><span class="s1">&#39;decade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span> <span class="p">;</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">genres_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;genres&#39;</span> <span class="p">])[</span><span class="s2">&quot;original_title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Genres in all movies&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Genres&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">);</span>
 </pre></div>
 
@@ -16414,7 +16446,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_67_0.png"
+<img src="output_68_0.png"
 >
 </div>
 
@@ -16444,6 +16476,9 @@ we will create the visualization to find insights about the factors relared to t
     <span class="n">item_df</span> <span class="o">=</span> <span class="n">genres_df</span><span class="p">[</span><span class="n">genres_df</span><span class="p">[</span><span class="s2">&quot;genres&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">]</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">item_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;decade&#39;</span> <span class="p">])[</span><span class="s2">&quot;original_title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span><span class="n">label</span> <span class="o">=</span> <span class="n">item</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Number Of Movies For Top 5 Genres Through Decades&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Decade&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movies&quot;</span><span class="p">);</span>
 </pre></div>
 
     </div>
@@ -16462,7 +16497,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_69_0.png"
+<img src="output_70_0.png"
 >
 </div>
 
@@ -16493,6 +16528,8 @@ we will create the visualization to find insights about the factors relared to t
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">pop_year</span><span class="o">=</span> <span class="n">movies_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;release_year&#39;</span><span class="p">])[</span><span class="s2">&quot;popularity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pop_year</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Popularity Through Years&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Popularity&quot;</span><span class="p">);</span>
 </pre></div>
 
@@ -16512,7 +16549,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_71_0.png"
+<img src="output_72_0.png"
 >
 </div>
 
@@ -16539,6 +16576,8 @@ we will create the visualization to find insights about the factors relared to t
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">runtime_year</span><span class="o">=</span> <span class="n">movies_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;release_year&#39;</span><span class="p">])[</span><span class="s2">&quot;runtime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">runtime_year</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Run Time Through Years&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Run Time (Minutes)&quot;</span><span class="p">);</span>
 </pre></div>
 
@@ -16558,7 +16597,7 @@ we will create the visualization to find insights about the factors relared to t
 
 
 <div class="output_png output_subarea ">
-<img src="output_73_0.png"
+<img src="output_74_0.png"
 >
 </div>
 
