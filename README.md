@@ -8,6 +8,14 @@ In this Investigation two important questions will be answered
 1. what are the factors related to the top 50 highest revenue movies ?
 2. how did the movie industry evolve through years ?
 
+##  Limitations
+
+A lot of movies in these data set have No budget or revenue which will negatively influence any financial analysis.
+There was no mention of awards for each movie to see the greatest movies in the critics' point of view.
+There was no mention of language or country of each movie that will help in the analysis.
+There was no mention of Writers or screenplay writers of each movie.
+The data set has NaN Values in a lot of columns Like Cast, director and genres which will decrease our data set
+
 ##  Conclusions
 
 The Factors related to the top 100 highest revenue movies are :
